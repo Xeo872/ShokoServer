@@ -21,7 +21,7 @@ jobs:
 
       - name: Publish ARM64 musl (Termux-friendly)
         run: |
-          dotnet publish Shoko.Server/Shoko.Server.csproj \
+          dotnet publish Shoko.CLI/Shoko.CLI.csproj \
             -c Release \
             -r linux-musl-arm64 \
             --self-contained true \
