@@ -1,0 +1,36 @@
+name: Termux-ARM64-Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install prerequisites
+        run: sudo apt-get update && sudo apt-get install -y mediainfo ffmpeg
+
+      - name: Publish ARM64 musl (Termux-friendly)
+        run: |
+          dotnet publish Shoko.Server/Shoko.Server.csproj \
+            -c Release \
+            -r linux-musl-arm64 \
+            --self-contained true \
+            -p:PublishTrimmed=false \
+            -p:PublishSingleFile=true \
+            -o out
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Shoko-Termux-ARM64
+          path: out
