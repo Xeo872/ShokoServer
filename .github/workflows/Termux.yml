@@ -23,7 +23,7 @@ jobs:
         run: |
           dotnet publish Shoko.CLI/Shoko.CLI.csproj \
             -c Release \
-            -r linux-musl-arm64 \
+            -r android-arm64 \
             --self-contained true \
             -p:PublishTrimmed=false \
             -p:PublishSingleFile=true \
