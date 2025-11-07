@@ -3,7 +3,7 @@ name: Build (Daily)
 on:
   push:
     branches:
-      - master
+      - masteryygghh
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
